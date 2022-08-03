@@ -32,11 +32,11 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
+	const router = useRouter()
 	const [loading, setLoading] = useState(false)
 	const [user, setUser] = useState<User | null>(null)
 	const [error, setError] = useState(null)
 	const [initialLoading, setInitialLoading] = useState(true)
-	const router = useRouter()
 
 	// Persisting the user
 	useEffect(
@@ -107,7 +107,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 	)
 
 	return (
-		<AuthContext.Provider value={memoedValue}>{!initialLoading && children}</AuthContext.Provider>
+		<AuthContext.Provider value={memoedValue}>
+			{!initialLoading && children}
+		</AuthContext.Provider>
 	)
 }
 

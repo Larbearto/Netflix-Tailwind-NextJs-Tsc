@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import useAuth from '../hooks/useAuth'
 
-type Inputs = {
+interface Inputs {
 	email: string
 	password: string
 }
@@ -56,12 +56,14 @@ function Login() {
 						<input
 							type='email'
 							placeholder='Email'
-							className='input'
+							className={`input ${
+								errors.email && 'border-b-2 border-orange-500'
+							}`}
 							{...register('email', { required: true })}
 						/>
 						{errors.email && (
 							<p className='p-1 text-[13px] font-light text-orange-500'>
-								Please enter a valid email
+								Please enter a valid email.
 							</p>
 						)}
 					</label>
@@ -69,7 +71,9 @@ function Login() {
 						<input
 							type='password'
 							placeholder='Password'
-							className='input'
+							className={`input ${
+								errors.password && 'border-b-2 border-orange-500'
+							}`}
 							{...register('password', { required: true })}
 						/>
 						{errors.password && (
@@ -81,8 +85,9 @@ function Login() {
 				</div>
 
 				<button
-					onClick={() => setLogin(true)}
 					className='w-full rounded bg-[#e50914] py-3 font-semibold'
+					onClick={() => setLogin(true)}
+					type='submit'
 				>
 					Sign In
 				</button>
@@ -90,9 +95,9 @@ function Login() {
 				<div className='text-[gray]'>
 					New to Netflix?{' '}
 					<button
+						className='cursor-pointer text-white hover:underline'
 						onClick={() => setLogin(false)}
 						type='submit'
-						className='text-white hover:underline'
 					>
 						Sign up now
 					</button>
@@ -101,4 +106,5 @@ function Login() {
 		</div>
 	)
 }
+
 export default Login

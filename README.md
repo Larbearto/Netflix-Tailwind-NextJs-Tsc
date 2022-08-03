@@ -285,6 +285,7 @@ await signUp(data.email, data.password)
 }
 
 return (
+
 <div className="relative flex h-screen w-screen flex-col md:items-center md:justify-center">
 <Head>
 <title>Netflix</title>
